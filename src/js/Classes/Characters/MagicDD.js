@@ -11,6 +11,7 @@ export default class MagicDD extends Character {
   defence = 40;
   _stoned = false;
   _range = 2;
+  #multi = 0.1;
 
   /**
    * @param {boolean} hasStoned устанавливает наличие "дурмана"
@@ -54,7 +55,7 @@ export default class MagicDD extends Character {
       attack -= this.#getStonedDecrease();
     }
 
-    return attack < 0 ? 0 : +attack.toFixed(2);
+    return attack > 0 ? +attack.toFixed(2) : 0;
   }
 
   /**
@@ -68,7 +69,7 @@ export default class MagicDD extends Character {
    * @returns {number} уменьшение атаки
    */
   #getDecreaseAttack() {
-    return this._attack * (this._range - 1) * 0.1;
+    return this._attack * (this._range - 1) * this.#multi;
   }
 
   /**
