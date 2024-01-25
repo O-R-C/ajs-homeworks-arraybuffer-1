@@ -30,7 +30,7 @@ export default class MagicDD extends Character {
    * @param {number} value значение расстояния
    */
   set range(value) {
-    this.checkValue(value, 'range');
+    this.#checkValue(value, 'range');
 
     this._range = value;
   }
@@ -39,7 +39,7 @@ export default class MagicDD extends Character {
    * @param {number} value значение атаки
    */
   set attack(value) {
-    this.checkValue(value, 'attack');
+    this.#checkValue(value, 'attack');
 
     this._attack = value;
   }
@@ -48,10 +48,10 @@ export default class MagicDD extends Character {
    * @returns {number} значение атаки
    */
   get attack() {
-    let attack = this._attack - this.getDecreaseAttack();
+    let attack = this._attack - this.#getDecreaseAttack();
 
     if (this._stoned) {
-      attack -= this.getStonedDecrease();
+      attack -= this.#getStonedDecrease();
     }
 
     return attack < 0 ? 0 : +attack.toFixed(2);
@@ -60,14 +60,14 @@ export default class MagicDD extends Character {
   /**
    * @returns {number} уменьшение атаки в состоянии "дурмана"
    */
-  getStonedDecrease() {
+  #getStonedDecrease() {
     return Math.log2(this._range) * 5;
   }
 
   /**
    * @returns {number} уменьшение атаки
    */
-  getDecreaseAttack() {
+  #getDecreaseAttack() {
     return this._attack * (this._range - 1) * 0.1;
   }
 
@@ -78,7 +78,7 @@ export default class MagicDD extends Character {
    *
    * @throws {Error} если значение не валидно
    */
-  checkValue(value, prop = null) {
+  #checkValue(value, prop) {
     if (typeof value !== 'number') {
       throw new Error('значение должно быть числом');
     }

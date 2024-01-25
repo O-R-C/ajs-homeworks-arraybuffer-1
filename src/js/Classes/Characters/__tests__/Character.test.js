@@ -6,7 +6,6 @@ describe('test class Character', () => {
 
     expect(result).toEqual({
       level: 1,
-      attack: 1,
       defence: 1,
       health: 100,
       _name: 'Character',
@@ -74,6 +73,7 @@ describe('test class Character', () => {
     describe('health > 0', () => {
       test('health 100', () => {
         const character = new Character('test');
+        character.attack = 1;
         character.levelUp();
 
         expect(character.health).toBe(100);
