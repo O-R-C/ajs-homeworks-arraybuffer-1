@@ -3,7 +3,7 @@
  */
 export default class Character {
   level = 1;
-  attack = 1;
+  // attack = 1;
   defence = 1;
   health = 100;
 
